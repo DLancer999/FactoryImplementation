@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,8 +12,7 @@ Class
     DDerived
  
 Description
-
-SourceFiles
+    Further extension of a concrete class that will be used polymorphically.
 
 \************************************************************************/
 
@@ -22,6 +21,7 @@ SourceFiles
 
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "Base.hpp"
 #include "Derived.hpp"
@@ -34,12 +34,12 @@ using DDerivedPtr = std::unique_ptr<DDerived>;
 class DDerived 
 : public PolymorphicInheritance<DDerived,Derived,Base>
 {
-public:
     //member variables
     // .
     // .
     // .
 
+public:
     static constexpr const char* name = "DDerived";
 
     //default Constructors

@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,10 +12,8 @@ Class
     PolymorphicBase
  
 Description
-    Extension of unordered_map to track Constructor/Destructor
-
-SourceFiles
-    -
+    The Base of every polymorphic inheritance structure has to inherit from
+    this class to gain access to a polymorphic factory.
 
 \************************************************************************/
 
@@ -24,8 +22,6 @@ SourceFiles
 
 #include <iostream>
 #include <memory>
-#include <unordered_map>
-#include <functional>
 
 #include "RegistryObject.hpp"
 
@@ -47,8 +43,8 @@ public:
     template <class... Args>
     static std::unique_ptr<BASE> polymorficCreate(const std::string& derivedName, Args&&... args)
     {
-        auto regIt = registry().registry.find(derivedName);
-        if (regIt != registry().registry.end())
+        auto regIt = registry().find(derivedName);
+        if (regIt != registry().end())
         {
             //Object of "derivedName" is found.
             //ObjectCreator function is called with arguments
@@ -63,7 +59,7 @@ public:
             //and return null pointer
             std::cout<<"Type \""<<derivedName<<"\" not found!"<<'\n';
             std::cout<<"Available types::"<<'\n';
-            for (auto it : registry().registry)
+            for (auto it : registry())
             {
                 auto& name = it.first;
                 std::cout<<name<<'\n';

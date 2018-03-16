@@ -34,7 +34,7 @@ DEBUGFLAGS= -g -O0
 
 ERRORFLAGS= -pedantic-errors
 
-OTHERFLAGS= -std=c++14
+OTHERFLAGS= -std=c++17
 
 WARNFLAGS= -Wall -Weffc++ -pedantic \
 	-Wextra -Wcast-align -Wcast-qual \

@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,10 +12,7 @@ Class
     RegistryObject
  
 Description
-    Extension of unordered_map to track Constructor/Destructor
-
-SourceFiles
-    -
+    Wrapper object to unordered_map to log operations.
 
 \************************************************************************/
 
@@ -23,16 +20,17 @@ SourceFiles
 #define REGISTRYOBJECT_H
 
 #include <iostream>
-#include <memory>
 #include <unordered_map>
-#include <functional>
 
 template <class T>
 class RegistryObject
 {
-public:
-    std::unordered_map<std::string,typename T::ObjectCreator> registry;
+    using ObjectCreator = typename T::ObjectCreator;
+    using Registry = std::unordered_map<std::string, ObjectCreator>;
+    using iterator = typename Registry::iterator;
+    Registry registry;
 
+public:
     RegistryObject():registry()
     {
         std::cout<<"RegistryObject of "<<T::name<<" initialized"<<'\n';
@@ -41,6 +39,28 @@ public:
     {
         std::cout<<"RegistryObject of "<<T::name<<" terminated"<<'\n';
     }
+
+    iterator find(const std::string& name)
+    {
+      return registry.find(name);
+    }
+
+    iterator begin()
+    {
+      return registry.begin();
+    }
+
+    iterator end()
+    {
+      return registry.end();
+    }
+
+    ObjectCreator& operator[](const std::string& name)
+    {
+        return registry[name];
+    }
+
+
 };
 
 #endif

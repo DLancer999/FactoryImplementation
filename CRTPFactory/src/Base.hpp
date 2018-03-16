@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,16 +12,14 @@ Class
     Base
  
 Description
-
-SourceFiles
+    Base class of polymorphic structure
 
 \************************************************************************/
 
 #ifndef BASE_H
 #define BASE_H
 
-#include <iostream>
-#include <memory>
+#include <string>
 
 #include "PolymorphicBase.hpp"
 

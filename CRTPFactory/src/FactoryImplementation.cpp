@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -10,13 +10,13 @@ License
 
 Description
     Main source file of FactoryImplementation program. 
-    Each RuntimeSelectable abstract class Defines its own Factory
+    Each RuntimeSelectable object inherits from PolymorphicInheritance class
+    which gives access to polymorphicCreate, clone and create functions.
+    Base class of polymorphic chain inherits from PolymorphicBase which
+    gives access to polymorficCreate function.
 
 \************************************************************************/
 #include <iostream>
-#include <iomanip>
-#include <memory>
-#include <vector>
 
 #include "Base.hpp"
 #include "Derived.hpp"

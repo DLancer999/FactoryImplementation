@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,10 +12,9 @@ Class
     PolymorphicInheritance
  
 Description
-    Dummy class to create runTimeSelection tables at global initialization stage
-
-SourceFiles
-    -
+    Every concrete class of a polymorphic inheritance structure should
+    delegate its inheritance through this function for creating/cloning
+    functionality, either through the base class or directly.
 
 \************************************************************************/
 
@@ -72,7 +71,10 @@ protected:
     {
         std::cout<<"Templated Constructor PInheritance Class"<<'\n';
     }
-    ~PolymorphicInheritance() = default;
+    ~PolymorphicInheritance()
+    {
+        std::cout<<"Destructor PInheritance"<<'\n';
+    }
 };
 
 #endif

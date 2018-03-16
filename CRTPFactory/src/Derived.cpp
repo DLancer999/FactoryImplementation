@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -11,7 +11,6 @@ License
 \************************************************************************/
 
 #include "Derived.hpp"
-#include <string>
 
 AddToRegistry<Derived, Base, BaseCreator> Derived::addToTable;
 

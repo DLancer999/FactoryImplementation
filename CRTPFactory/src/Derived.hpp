@@ -1,7 +1,7 @@
 
 /*************************************************************************\
 License
-    Copyright (c) 2017 Kavvadias Ioannis.
+    Copyright (c) 2018 Kavvadias Ioannis.
     
     This file is part of FactoryImplementation.
     
@@ -12,8 +12,7 @@ Class
     Derived
  
 Description
-
-SourceFiles
+    Concrete class that will be used polymorphically.
 
 \************************************************************************/
 
@@ -22,6 +21,7 @@ SourceFiles
 
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "Base.hpp"
 #include "PolymorphicInheritance.hpp"
@@ -31,7 +31,7 @@ class Derived;
 using DerivedPtr = std::unique_ptr<Derived>;
 
 class Derived 
-: public PolymorphicInheritance<Derived, Base, Base>
+: public PolymorphicInheritance<Derived, Base>
 {
     //member variables
     // .
