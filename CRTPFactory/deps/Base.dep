@@ -1,0 +1,2 @@
+obj/Base.o deps/Base.dep : src/Base.cpp src/Base.hpp src/PolymorphicBase.hpp \
+ src/RegistryObject.hpp
