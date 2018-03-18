@@ -1,3 +1,0 @@
-obj/Derived.o deps/Derived.dep : src/Derived.cpp src/Derived.hpp src/Base.hpp \
- src/PolymorphicBase.hpp src/RegistryObject.hpp \
- src/PolymorphicInheritance.hpp src/AddToRegistry.hpp

@@ -20,17 +20,12 @@ Description
 #define BASE_H
 
 #include <string>
-
-#include "PolymorphicBase.hpp"
+#include <memory>
 
 class Base;
 using BasePtr = std::unique_ptr<Base>;
-    //signature of each creator function used to create BasePtr
-    //objects polymorphically
-using BaseCreator = BasePtr(*)(const std::string&);
 
 class Base
-: public PolymorphicBase<Base, BaseCreator>
 {
     //member variables
     // .
@@ -38,6 +33,10 @@ class Base
     // .
 
 public:
+    //signature of each creator function used to create BasePtr
+    //objects polymorphically
+    using ObjectCreator = BasePtr(*)(const std::string&);
+
     //this is used only for logging
     static constexpr const char* name = "Base";
 

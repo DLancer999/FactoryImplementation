@@ -23,8 +23,15 @@ Description
 #include <unordered_map>
 
 template <class T>
+class RegistryObject;
+template <class T>
+RegistryObject<T>& registry();
+
+template <class T>
 class RegistryObject
 {
+    //needs to be friend to access private constructor
+    friend RegistryObject<T>& registry<T>();
     //usefull alias
     using ObjectCreator = typename T::ObjectCreator;
     using Registry = std::unordered_map<std::string, ObjectCreator>;
@@ -33,7 +40,6 @@ class RegistryObject
     //member variables
     Registry registry;
 
-public:
     RegistryObject():registry()
     {
         std::cout<<"RegistryObject of "<<T::name<<" initialized"<<'\n';
@@ -43,6 +49,7 @@ public:
         std::cout<<"RegistryObject of "<<T::name<<" terminated"<<'\n';
     }
 
+public:
     iterator find(const std::string& name)
     {
         return registry.find(name);
@@ -63,5 +70,13 @@ public:
         return registry[name];
     }
 };
+
+//each RegistryObject is a singleton
+template <class T>
+RegistryObject<T>& registry() 
+{
+    static RegistryObject<T> _registry;
+    return _registry;
+}
 
 #endif

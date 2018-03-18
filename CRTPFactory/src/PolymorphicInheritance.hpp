@@ -30,20 +30,21 @@ class PolymorphicInheritance
 {
 public:
     
-    template <class... Args>
-    static std::unique_ptr<SELF> create(Args&&... args) { 
-      return std::make_unique<SELF>(std::forward<Args>(args)...);
-    }
-
-    template <class... Args>
-    static std::unique_ptr<POLYMORPHICBASE> polymorphicCreate(Args&&... args) 
-    { 
-      return std::make_unique<SELF>(std::forward<Args>(args)...);
-    }
-
-    virtual std::unique_ptr<POLYMORPHICBASE> clone() override 
+    template <class... ARGS>
+    static std::unique_ptr<SELF> create(ARGS&&... args) 
     {
-      return std::make_unique<SELF>(*(static_cast<SELF*>(this)));
+      return std::make_unique<SELF>(std::forward<ARGS>(args)...);
+    }
+
+    template <class... ARGS>
+    static std::unique_ptr<POLYMORPHICBASE> polymorphicCreate(ARGS&&... args)
+    {
+      return std::make_unique<SELF>(std::forward<ARGS>(args)...);
+    }
+
+    virtual std::unique_ptr<POLYMORPHICBASE> clone() override
+    {
+      return create(*(static_cast<SELF*>(this)));
     }
 
 protected:
@@ -65,9 +66,9 @@ protected:
         std::cout<<"Move Constructor PInheritance Class"<<'\n';
     }
 
-    template <class... Args>
-    PolymorphicInheritance(Args&&... args):
-    BASE(std::forward<Args>(args)...)
+    template <class... ARGS>
+    PolymorphicInheritance(ARGS&&... args):
+    BASE(std::forward<ARGS>(args)...)
     {
         std::cout<<"Templated Constructor PInheritance Class"<<'\n';
     }

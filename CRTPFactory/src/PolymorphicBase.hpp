@@ -35,13 +35,14 @@ public:
     static constexpr const char* name = BASE::name;
 
     //Registry of available inherited classes and a creator for each class
-    static RegistryObject<This>& registry() {
-      static RegistryObject<This> _registry;
-      return _registry;
+    static RegistryObject<This>& registry() 
+    {
+        static RegistryObject<This> _registry;
+        return _registry;
     }
 
-    template <class... Args>
-    static std::unique_ptr<BASE> polymorficCreate(const std::string& derivedName, Args&&... args)
+    template <class... ARGS>
+    static std::unique_ptr<BASE> create(const std::string& derivedName, ARGS&&... args)
     {
         auto regIt = registry().find(derivedName);
         if (regIt != registry().end())
@@ -50,7 +51,7 @@ public:
             //ObjectCreator function is called with arguments
             //for arbitrary constructor
             auto& cnstr = regIt->second;
-            return cnstr(std::forward<Args>(args)...);
+            return cnstr(std::forward<ARGS>(args)...);
         }
         else
         {
@@ -61,8 +62,8 @@ public:
             std::cout<<"Available types::"<<'\n';
             for (auto it : registry())
             {
-                auto& name = it.first;
-                std::cout<<name<<'\n';
+                auto& availableName = it.first;
+                std::cout<<availableName<<'\n';
             }
         
         }

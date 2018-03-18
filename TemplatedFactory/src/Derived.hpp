@@ -24,14 +24,13 @@ Description
 #include <string>
 
 #include "Base.hpp"
-#include "PolymorphicInheritance.hpp"
 #include "AddToRegistry.hpp"
 
 class Derived;
 using DerivedPtr = std::unique_ptr<Derived>;
 
 class Derived 
-: public PolymorphicInheritance<Derived, Base>
+: public Base
 {
     //member variables
     // .
@@ -56,11 +55,12 @@ public:
     //... rest of operators
 
     virtual void whoAmI(void);
+    virtual BasePtr clone();
 
 private:
     //Add Derived class to RegistryObject<Base> using
     //a creator function with a signature of"BaseCreator" 
-    static AddToRegistry<Derived, Base> addToRegistry;
+    static AddToRegistry<Derived, Derived::ObjectCreator> addToRegistry;
 };
 
 #endif

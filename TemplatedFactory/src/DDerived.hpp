@@ -9,29 +9,29 @@ License
     full license information.  
 
 Class
-    Derived
+    DDerived
  
 Description
-    Concrete class that will be used polymorphically.
+    Further extension of a concrete class that will be used polymorphically.
 
 \************************************************************************/
 
-#ifndef DERIVED_H
-#define DERIVED_H
+#ifndef DDERIVED_H
+#define DDERIVED_H
 
 #include <iostream>
 #include <memory>
 #include <string>
 
 #include "Base.hpp"
-#include "PolymorphicInheritance.hpp"
+#include "Derived.hpp"
 #include "AddToRegistry.hpp"
 
-class Derived;
-using DerivedPtr = std::unique_ptr<Derived>;
+class DDerived;
+using DDerivedPtr = std::unique_ptr<DDerived>;
 
-class Derived 
-: public PolymorphicInheritance<Derived, Base>
+class DDerived 
+: public Derived
 {
     //member variables
     // .
@@ -39,28 +39,29 @@ class Derived
     // .
 
 public:
-    static constexpr const char* name = "Derived";
+    static constexpr const char* name = "DDerived";
 
     //default Constructors
-    Derived();
-    Derived(const Derived&);
-    Derived(Derived&&);
+    DDerived();
+    DDerived(const DDerived&);
+    DDerived(DDerived&&);
     //arbitrary Constructor
-    Derived(const std::string&);
+    DDerived(const std::string&);
     //destructor
-    virtual ~Derived();
+    virtual ~DDerived();
 
     //operators ...
-    Derived& operator=(const Derived&); 
-    Derived& operator=(Derived&&); 
+    DDerived& operator=(const DDerived&); 
+    DDerived& operator=(DDerived&&); 
     //... rest of operators
 
     virtual void whoAmI(void);
+    virtual BasePtr clone();
 
 private:
-    //Add Derived class to RegistryObject<Base> using
+    //Add DDerived class to RegistryObject<Base> using
     //a creator function with a signature of"BaseCreator" 
-    static AddToRegistry<Derived, Base> addToRegistry;
+    static AddToRegistry<DDerived, DDerived::ObjectCreator> addToRegistry;
 };
 
 #endif

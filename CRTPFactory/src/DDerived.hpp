@@ -59,7 +59,9 @@ public:
     virtual void whoAmI(void);
 
 private:
-    static AddToRegistry<DDerived, Base, BaseCreator> addToTable;
+    //Add DDerived class to RegistryObject<Base> using
+    //a creator function with a signature of"BaseCreator" 
+    static AddToRegistry<DDerived, Base> addToRegistry;
 };
 
 #endif

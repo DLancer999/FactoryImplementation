@@ -19,12 +19,17 @@ Description
 #ifndef ADDTOREGISTRY_H
 #define ADDTOREGISTRY_H
 
-//ADDED class has to inherit from PolymorphicInheritance and from HASREGISTRY
-//HASREGISTRY class has to inherit from PolymorphicBase
-template <class ADDED, class HASREGISTRY>
-class AddToRegistry
+#include "CreateFunctions.hpp"
+
+template <class,class>
+class AddToRegistry; //no implementation
+
+//weird specialization syntax required to extract ARGS pack
+//out of ObjectCreator instead of passing the same argument pack
+//around for each AddToRegistry object
+template <class ADDED, class HASREGISTRY, class... ARGS>
+class AddToRegistry<ADDED, std::unique_ptr<HASREGISTRY>(*)(ARGS...)>
 {
-    using ObjectCreator = typename HASREGISTRY::ObjectCreator;
 public:
     AddToRegistry()
     {
@@ -32,11 +37,8 @@ public:
         std::cout<<"Adding \"" <<ADDED::name
                  <<"\" to RuntimeSelectionTable of " <<HASREGISTRY::name<<'\n';
 
-        //needed to define which polymorphicCreate instantiation we need
-        ObjectCreator createFunc = ADDED::polymorphicCreate;
-
         //actual addition
-        HASREGISTRY::registry()[ADDED::name] = createFunc;
+        registry<HASREGISTRY>()[ADDED::name] = polymorphicCreate<ADDED, HASREGISTRY, ARGS...>;
     }
 };
 

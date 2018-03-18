@@ -1,3 +1,0 @@
-obj/FactoryImplementation.o deps/FactoryImplementation.dep : src/FactoryImplementation.cpp src/Base.hpp \
- src/PolymorphicBase.hpp src/RegistryObject.hpp src/Derived.hpp \
- src/PolymorphicInheritance.hpp src/AddToRegistry.hpp src/DDerived.hpp

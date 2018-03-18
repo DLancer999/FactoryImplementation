@@ -10,14 +10,15 @@ License
 
 Description
     Main source file of FactoryImplementation program. 
-    Each RuntimeSelectable object inherits from PolymorphicInheritance class
-    which gives access to polymorphicCreate, clone and create functions.
-    Base class of polymorphic chain inherits from PolymorphicBase which
-    gives access to create function.
+    Each RuntimeSelectable object has access to templated creation functions.
+    To use them, each derived object has to include an instantiation of
+    the AddToRegistry class which builds a factory map.
+    Each derived object has to implement its own clone function.
 
 \************************************************************************/
 #include <iostream>
 
+#include "CreateFunctions.hpp"
 #include "Base.hpp"
 #include "Derived.hpp"
 #include "DDerived.hpp"
@@ -30,7 +31,7 @@ int main()
 
     {
         std::cout<<"--creating Derived from default constructor"<<'\n';
-        BasePtr basePtr = Derived::create();
+        BasePtr basePtr = create<Derived>();
         basePtr->whoAmI();
     }
 
@@ -38,7 +39,7 @@ int main()
 
     {
         std::cout<<"--creating DDerived from arbitrary constructor"<<'\n';
-        BasePtr basePtr = DDerived::create("str");
+        BasePtr basePtr = create<DDerived>("str");
         basePtr->whoAmI();
     }
 
@@ -51,7 +52,7 @@ int main()
         std::cin>>type;
         //Create Object of Base from Derived type name and an arbitrary
         //constructor defined in Base
-        BasePtr tmp = Base::create(type, "string");
+        BasePtr tmp = pCreate<Base>(type, "string");
         if (tmp) {
             tmp->whoAmI();
             std::cout<<'\n';
